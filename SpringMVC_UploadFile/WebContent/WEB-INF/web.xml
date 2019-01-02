@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>SpringMVC001</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+   <!--配置一个前置控制器  类路径 -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+   <!--  除了jsp文件不能进入springmvc -->
+    <url-pattern>/</url-pattern> 
+  </servlet-mapping>
+  <!-- 设置编码的过滤器 -->
+  <filter>  
+    <filter-name>encodingFilter</filter-name>  
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+    <init-param><!--配置初始化参数 -->
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>  
+  <!-- 设置过滤哪些请求 -->
+  <filter-mapping>  
+    <filter-name>encodingFilter</filter-name>  
+    <url-pattern>/*</url-pattern>  
+  </filter-mapping> 
+  
+</web-app>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">                    
+
+    <!-- 配置springmvc的扫描包范围  基于注解 -->
+    <context:component-scan base-package="com.etc.controller"/>
+
+    <!--springmvc为controller分发请求所必须的-->
+    <mvc:annotation-driven />
+    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+    <!-- 创建视图解析器,支持jsp -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+            id="internalResourceViewResolver">
+           <!--  之前hello.jsp
+               现在控制器只需要写hello,他会帮你拼接/WEB-INF/jsp/纯视图文件名不需要路径.jsp -->
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+     <!--  文件上传的视图解析器-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="defaultEncoding" value="utf-8"/><!-- 在web.xml里面有设置过编码，正常不需要再设置 -->
+	<property name="maxUploadSize" value="2048000"></property><!-- 上传的文件最大大小 -->
+	</bean>
+    
+</beans>
